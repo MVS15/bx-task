@@ -6,20 +6,20 @@
 	$arResult = ['SEF_FOLDER' => $arParams['SEF_FOLDER']];
 	$arVariables = [];
 	
-    $arUrlTemplates = CComponentEngine::MakeComponentUrlTemplates([
+	$arUrlTemplates = CComponentEngine::MakeComponentUrlTemplates([
 		'list' => 'index.php',
 		'detail' => '#GROUP_ID#',
 	], []);
-    
-    $componentPage = CComponentEngine::ParseComponentPath(
-        $arParams['SEF_FOLDER'],
-        $arUrlTemplates,
-        $arVariables
-    );
 	
-    if (strlen($componentPage) <= 0) $componentPage = 'list';
+	$componentPage = CComponentEngine::ParseComponentPath(
+		$arParams['SEF_FOLDER'],
+		$arUrlTemplates,
+		$arVariables
+	);
 	
-    CComponentEngine::InitComponentVariables($componentPage, ['GROUP_ID'], [], $arVariables);
+	if (strlen($componentPage) <= 0) $componentPage = 'list';
+	
+	CComponentEngine::InitComponentVariables($componentPage, ['GROUP_ID'], [], $arVariables);
 	
 	if ($componentPage == 'detail') {
 		$arResult['GROUP_ID'] = $arVariables['GROUP_ID'];
