@@ -8,7 +8,7 @@
 	
 	$arUrlTemplates = CComponentEngine::MakeComponentUrlTemplates([
 		'list' => 'index.php',
-		'detail' => '#GROUP_ID#',
+		'detail' => '#GROUP_ID#/',
 	], []);
 	
 	$componentPage = CComponentEngine::ParseComponentPath(
@@ -24,11 +24,12 @@
 	if ($componentPage == 'detail') {
 		$arResult['GROUP_ID'] = $arVariables['GROUP_ID'];
 	} else {
+		$arResult['PAGE_TITLE'] = $arParams['PAGE_TITLE'];
 		$arResult['GROUPS'] = [];
 		
 		$groups = GroupTable::getList([
 			'select' => ['ID', 'NAME'],
-			'cache' => ['ttl' => $arParams['CACHE_TIME']]
+			'cache' => ['ttl' => $arParams['TTL']]
 		]);
 		
 		while ($group = $groups->fetch()) {
